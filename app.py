@@ -6,9 +6,8 @@ st.set_page_config(page_title="Media SPLSV", layout="centered")
 st.title("📘 Media Pembelajaran SPLSV")
 st.write("Belajar & Berlatih Persamaan Linear Satu Variabel")
 
-# =========================
-# SESSION STATE
-# =========================
+# SYARAT
+
 if "score" not in st.session_state:
     st.session_state.score = 0
 
@@ -18,14 +17,14 @@ if "total" not in st.session_state:
 if "soal" not in st.session_state:
     st.session_state.soal = None
 
-# =========================
+
 # PILIH LEVEL
-# =========================
+
 level = st.selectbox("Pilih Level", ["Mudah", "Sedang", "Sulit"])
 
-# =========================
+
 # GENERATE SOAL
-# =========================
+
 def generate_soal(level):
     if level == "Mudah":
         a = random.randint(1, 5)
@@ -43,15 +42,15 @@ def generate_soal(level):
     c = a * x + b
     return a, b, c, x
 
-# =========================
+
 # BUAT SOAL BARU
-# =========================
+
 if st.button("🎲 Buat Soal"):
     st.session_state.soal = generate_soal(level)
 
-# =========================
+
 # TAMPILKAN SOAL
-# =========================
+
 if st.session_state.soal:
     a, b, c, jawaban = st.session_state.soal
 
@@ -69,9 +68,9 @@ if st.session_state.soal:
         else:
             st.error(f"❌ Salah. Jawaban yang benar adalah x = {jawaban}")
 
-        # =========================
+        
         # TAMPILKAN LANGKAH
-        # =========================
+        
         st.markdown("### Pembahasan:")
         st.write(f"{a}x + {b} = {c}")
         st.write(f"{a}x = {c} - {b}")
@@ -79,9 +78,9 @@ if st.session_state.soal:
         st.write(f"x = {(c - b)} / {a}")
         st.write(f"x = {jawaban}")
 
-# =========================
+
 # SKOR
-# =========================
+
 st.markdown("---")
 st.subheader("📊 Skor Kamu")
 
@@ -93,9 +92,9 @@ if st.session_state.total > 0:
 else:
     st.write("Belum ada soal dikerjakan")
 
-# =========================
-# RESET
-# =========================
+
+# RESET SKOR
+
 if st.button("🔄 Reset Skor"):
     st.session_state.score = 0
     st.session_state.total = 0
